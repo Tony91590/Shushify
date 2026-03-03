@@ -133,7 +133,7 @@ class DependedHookFailedException(
 ) : Exception("Depended hook $subHookName failed.", exception)
 
 @SuppressLint("CommitPrefEdits")
-abstract class BaseHook(private val app: Application, val lpparam: LoadPackageParam) : IHook {
+abstract class BaseHook(protected val app: Application, val lpparam: LoadPackageParam) : IHook {
     override val classLoader = lpparam.classLoader!!
 
     // hooks
