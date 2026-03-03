@@ -1,5 +1,5 @@
 <div align="center">
-  <h1>ReVanced Xposed Spotify</h1>
+  <h1>Shushify</h1>
   <br>
 </div>
 
