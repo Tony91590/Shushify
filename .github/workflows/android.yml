@@ -3,8 +3,6 @@ name: Android CI
 on:
   push:
     branches: [ "main" ]
-  schedule:
-    - cron: '0 0 * * *'
 
 jobs:
   build:
@@ -29,12 +27,9 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
-    - name: Get random number
-      id: random
-      run: echo "NUMBER=$(shuf -i 1-10000 -n 1)" >> $GITHUB_OUTPUT
-
     - name: Build Release
-      run: ./gradlew assembleUniversalRelease -PPACKAGE_NAME_SEED=${{ steps.random.outputs.NUMBER }}
+      # Fixed seed → stable package name across builds (allows direct updates without reinstall)
+      run: ./gradlew assembleUniversalRelease -PPACKAGE_NAME_SEED=1337
 
     - name: Upload a Release Artifact
       uses: actions/upload-artifact@v4
@@ -47,10 +42,10 @@ jobs:
     - name: Create AutoBuild Release
       run: |
         GIT_DESCRIBE=$(git rev-parse --short HEAD)
-        GIT_COMMIT_DATE=$(git log -1 --format=%cd --date=format:%y%m%d)
+        VERSION=$(grep 'versionName = ' app/build.gradle.kts | sed 's/.*versionName = "\(.*\)".*/\1/')
         cd app/build/outputs/apk/universal/release/
-        mv app-universal-release.apk Shushify-${GIT_COMMIT_DATE}.apk
+        mv app-universal-release.apk Shushify-v${VERSION}.apk
         gh release delete autobuild --yes || true
-        gh release create autobuild Shushify-${GIT_COMMIT_DATE}.apk --latest --title "Shushify — Build ${GIT_COMMIT_DATE}" --notes "Commit ${GIT_DESCRIBE}. Automatically mutes Spotify audio ads."
+        gh release create autobuild Shushify-v${VERSION}.apk --latest --title "Shushify v${VERSION} (${GIT_DESCRIBE})" --notes "This is an auto build by Github Android CI"
       env:
         GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
