@@ -13,7 +13,7 @@ No interaction needed — it works silently in the background.
 - **Ad Muter** — automatically mutes audio ads and unmutes when music resumes
 - **Unlock all other Premium features** - based on v260303 of [xposed spotify](https://github.com/chsbuffer/ReVancedXposed_Spotify)
 
-So ads are still visible, but not audible. [Mutify](https://github.com/MutifyApp/Mutify) style directly in Spotify.
+So ads are still visible, but not audible. [Mutify](https://github.com/teekamsuthar/Mutify/) style directly in Spotify.
 
 ---
 
