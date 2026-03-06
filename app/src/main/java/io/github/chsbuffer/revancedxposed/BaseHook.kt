@@ -133,7 +133,7 @@ class DependedHookFailedException(
 ) : Exception("Depended hook $subHookName failed.", exception)
 
 @SuppressLint("CommitPrefEdits")
-abstract class BaseHook(protected val app: Application, val lpparam: LoadPackageParam) : IHook {
+abstract class BaseHook(private val app: Application, val lpparam: LoadPackageParam) : IHook {
     override val classLoader = lpparam.classLoader!!
 
     // hooks
@@ -212,6 +212,7 @@ abstract class BaseHook(protected val app: Application, val lpparam: LoadPackage
             XposedBridge.log("${lpparam.appInfo.packageName} version: ${getAppVersion()}")
             if (success) {
                 Utils.showToastLong("apply hooks success")
+            }
         }
     }
 
