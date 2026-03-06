@@ -2,11 +2,11 @@ name: Android CI
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "Fuck" ]
     tags-ignore:
       - 'v*'          # tagged releases are handled by release.yml
   pull_request:
-    branches: [ "main" ]
+    branches: [ "Fuck" ]
   schedule:
     - cron: '0 0 * * *'
 
