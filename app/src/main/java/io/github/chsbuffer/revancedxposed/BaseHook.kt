@@ -181,7 +181,7 @@ abstract class BaseHook(protected val app: Application, val lpparam: LoadPackage
         if (!isCached) {
             cache.clearAll()
             cache.put("id", id)
-            Utils.showToastLong("Shushify is loading..")
+            Utils.showToastLong("ReVanced Xposed is initializing, please wait...")
         }
     }
 
