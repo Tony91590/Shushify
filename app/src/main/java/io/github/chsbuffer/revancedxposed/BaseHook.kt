@@ -211,7 +211,7 @@ abstract class BaseHook(protected val app: Application, val lpparam: LoadPackage
         if (DEBUG) {
             XposedBridge.log("${lpparam.appInfo.packageName} version: ${getAppVersion()}")
             if (success) {
-                Utils.showToastLong("Ready to Shush ads")
+                Utils.showToastLong("apply hooks success")
             }
         }
     }
