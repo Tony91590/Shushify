@@ -181,7 +181,7 @@ abstract class BaseHook(protected val app: Application, val lpparam: LoadPackage
         if (!isCached) {
             cache.clearAll()
             cache.put("id", id)
-            Utils.showToastLong("Shushify is loading..")
+            Utils.showToastLong("ReVanced Xposed is initializing, please wait...")
         }
     }
 
@@ -208,9 +208,10 @@ abstract class BaseHook(protected val app: Application, val lpparam: LoadPackage
 
     private fun logDebugInfo() {
         val success = failedHooks.isEmpty()
-        XposedBridge.log("${lpparam.appInfo.packageName} version: ${getAppVersion()}")
-        if (success) {
-            Utils.showToastLong("Ready to Shush ads")
+        if (DEBUG) {
+            XposedBridge.log("${lpparam.appInfo.packageName} version: ${getAppVersion()}")
+            if (success) {
+                Utils.showToastLong("apply hooks success")
         }
     }
 
